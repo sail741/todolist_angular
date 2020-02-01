@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Edit List</h1>
+<div mat-dialog-content>
+  <div class="fav_title_container">
+    <div class="fav_div" (click)="toggleFav()">
+      <div *ngIf="this.data.editedList.isFav;else is_not_fav" class="is_fav">
+        <i class="material-icons">star</i>
+      </div>
+      <ng-template #is_not_fav>
+        <i class="material-icons">star_outline</i>
+      </ng-template>
+    </div>
+    <mat-form-field>
+      <input matInput [(ngModel)]="data.editedList.title" (keyup.enter)="onSaveClick()" cdkFocusInitial>
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onCancelClick()">Cancel</button>
+  <button mat-raised-button (click)="onDeleteClick()" color="warn">Delete</button>
+  <button mat-raised-button (click)="onSaveClick()" color="primary" [disabled]="!this.hasValidData()">Save</button>
+</div>

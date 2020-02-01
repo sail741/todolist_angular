@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Edit Item</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.editedItem.title" (keyup.enter)="onSaveClick()" cdkFocusInitial>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Flag</mat-label>
+    <select [(ngModel)]="selectedFlag" matNativeControl>
+      <option *ngFor="let flag of this.mapFlag; index as i" value="{{flag.name}}" [selected]="this.data.editedItem.flag === flag.id">{{flag.name}}</option>
+    </select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onCancelClick()">Cancel</button>
+  <button mat-raised-button (click)="onDeleteClick()" color="warn">Delete</button>
+  <button mat-raised-button (click)="onSaveClick()" color="primary" [disabled]="!this.hasValidData()">Save</button>
+</div>

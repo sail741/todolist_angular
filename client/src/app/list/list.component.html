@@ -1,0 +1,64 @@
+<div class="header-line">
+  <div class="header-home">
+    <button mat-button (click)="router.navigateByUrl('/');">
+      <div class="mat-icon-container">
+        <i class="material-icons">home</i>
+      </div>
+    </button>
+  </div>
+  <div class="header-title">
+    <div class="header-title-button-cn">
+      <button mat-button (click)="clickListTitle($event);">
+        <h2>{{this.list.title}}</h2>
+      </button>
+    </div>
+  </div>
+  <div class="header-arrow">
+    <div class="header-prev">
+      <button mat-button [disabled]="!this.canPrevHistoric()" (click)="this.prevHistoric();">
+        <div class="mat-icon-container">
+          <i class="material-icons">skip_previous</i>
+        </div>
+      </button>
+    </div>
+    <div class="header-next">
+      <button mat-button [disabled]="!this.canNextHistoric()" (click)="this.nextHistoric();">
+        <div class="mat-icon-container">
+          <i class="material-icons">skip_next</i>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div cdkDropList class="dropable-list" (cdkDropListDropped)="drop($event)" *ngIf="(this.list.items) && (this.list.items.length)>0" >
+  <div class="list-row dropable-box" [class.selected]="item.selected" (click)="toggle(item)" *ngFor="let item of this.list.items; index as i" cdkDrag>
+    <div class="item-handle mat-icon-container" (click)="$event.stopPropagation()" cdkDragHandle>
+      <i class="material-icons">drag_indicator</i>
+      <!--
+      <i class="material-icons">open_with</i>
+      -->
+    </div>
+    <div class="item-flag mat-icon-container">
+      <div class="flag_{{item.flag}}">
+        <i class="material-icons">flag</i>
+      </div>
+    </div>
+    <div class="item-content noselect">
+      {{item.title}}
+    </div>
+    <div class="item-setting">
+      <button mat-mini-fab color="primary" class="ng-button-gray small-mini-fab" (click)="$event.stopPropagation();openModalEditItem(i);">
+        <div class="mat-icon-container">
+          <i class="material-icons">settings</i>
+        </div>
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<div class="list-row">
+  <input placeholder="New item..." type="text" class="input-new-item" [(ngModel)]="addedValue" (keyup.enter)="addItem()" matInput>
+  <button mat-raised-button class="button-add" (click)="addItem()">Add</button>
+</div>
