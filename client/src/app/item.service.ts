@@ -6,26 +6,29 @@ import {List} from './List';
 @Injectable()
 export class ItemService {
 
+  // ipServer = 'http://192.168.1.100:3000';
+  ipServer = 'http://localhost:3000';
+
   constructor(private http: HttpClient) {
   }
 
   deleteList(list: List) {
-    return this.http.delete<any>('http://localhost:3000/lists/' + list.id);
+    return this.http.delete<any>(this.ipServer + '/lists/' + list.id);
   }
 
   postList(newList: List) {
-    return this.http.post<List>('http://localhost:3000/lists/', newList);
+    return this.http.post<List>(this.ipServer + '/lists/', newList);
   }
 
   putList(editedList: List) {
-    return this.http.put<List>('http://localhost:3000/lists/' + editedList.id, editedList);
+    return this.http.put<List>(this.ipServer + '/lists/' + editedList.id, editedList);
   }
 
   getList(id: string) {
-    return this.http.get<List>('http://localhost:3000/lists/' + id);
+    return this.http.get<List>(this.ipServer + '/lists/' + id);
   }
 
   getLists() {
-    return this.http.get<List[]>('http://localhost:3000/lists/');
+    return this.http.get<List[]>(this.ipServer + '/lists/');
   }
 }
