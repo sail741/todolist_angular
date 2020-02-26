@@ -7,7 +7,8 @@ import {List} from './List';
 export class ItemService {
 
   // ipServer = 'http://192.168.1.100:3000';
-  ipServer = 'http://localhost:3000';
+  // ipServer = 'http://localhost:3000';
+  ipServer = window.env.apiUrl;
 
   constructor(private http: HttpClient) {
   }
