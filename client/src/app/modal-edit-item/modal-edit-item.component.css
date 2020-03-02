@@ -1,3 +1,15 @@
 .mat-form-field  {
   width:100%;
 }
+.material-icons.md-16 { font-size: 16px; }
+.container-text-maticon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container-text-maticon > .material-icons.margin-right-5 {
+  margin-right: 5px;
+}
+.container-text-maticon > .material-icons.margin-left-5 {
+  margin-left: 5px;
+}

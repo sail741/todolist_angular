@@ -17,6 +17,8 @@ export class ModalEditItemComponent implements OnInit {
 
   mapFlag: {id: number; name: string}[] = [];
   selectedFlag: string;
+  askedForDelete: boolean;
+  materialIconDelete: string;
 
   constructor(
     public dialogRef: MatDialogRef<ModalEditItemComponent>,
@@ -30,6 +32,8 @@ export class ModalEditItemComponent implements OnInit {
       }
     }
     this.selectedFlag = this.mapFlag[this.data.editedItem.flag].name;
+    this.askedForDelete = false;
+    this.materialIconDelete = 'lock';
   }
 
   hasValidData() {
@@ -54,11 +58,25 @@ export class ModalEditItemComponent implements OnInit {
     });
   }
 
+  unlockDelete() {
+    this.askedForDelete = true;
+    this.materialIconDelete = 'lock_open';
+    const that = this;
+    setTimeout(() => {
+      that.askedForDelete = false;
+      that.materialIconDelete = 'lock';
+    }, 1000);
+  }
+
   onDeleteClick(): void {
-    this.dialogRef.close({
-      status: ModalResultEnum.DELETE,
-      data: null
-    });
+    if (this.askedForDelete) {
+      this.dialogRef.close({
+        status: ModalResultEnum.DELETE,
+        data: null
+      });
+    } else {
+      this.unlockDelete();
+    }
   }
 
 }

@@ -14,11 +14,16 @@ export interface DialogData {
 })
 export class ModalEditListComponent implements OnInit {
 
+  askedForDelete: boolean;
+  materialIconDelete: string;
+
   constructor(
     public dialogRef: MatDialogRef<ModalEditListComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   ngOnInit() {
+    this.askedForDelete = false;
+    this.materialIconDelete = 'lock';
   }
 
   hasValidData() {
@@ -42,11 +47,25 @@ export class ModalEditListComponent implements OnInit {
     });
   }
 
+  unlockDelete() {
+    this.askedForDelete = true;
+    this.materialIconDelete = 'lock_open';
+    const that = this;
+    setTimeout(() => {
+      that.askedForDelete = false;
+      that.materialIconDelete = 'lock';
+    }, 1000);
+  }
+
   onDeleteClick(): void {
-    this.dialogRef.close({
-      status: ModalResultEnum.DELETE,
-      data: null
-    });
+    if (this.askedForDelete) {
+      this.dialogRef.close({
+        status: ModalResultEnum.DELETE,
+        data: null
+      });
+    } else {
+      this.unlockDelete();
+    }
   }
 
   toggleFav() {
