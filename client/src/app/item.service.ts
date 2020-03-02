@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {List} from './List';
+import {environment} from '../environments/environment';
 
 @Injectable()
 export class ItemService {
 
   // ipServer = 'http://192.168.1.100:3000';
-  ipServer = 'http://localhost:3000';
+  // ipServer = 'http://localhost:3000';
+  ipServer = environment.apiUrl;
 
   constructor(private http: HttpClient) {
   }

@@ -26,7 +26,7 @@ export class ListComponent implements OnInit {
   currentHistoricIndex: number;
   private routeSub: Subscription;
 
-  constructor(private itemService: ItemService, private route: ActivatedRoute, private router: Router,
+  constructor(private itemService: ItemService, private route: ActivatedRoute, public router: Router,
               public dialog: MatDialog, private location: Location) { }
 
   ngOnInit() {
