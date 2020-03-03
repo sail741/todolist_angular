@@ -9,7 +9,7 @@
       </ng-template>
     </div>
     <mat-form-field>
-      <input matInput [(ngModel)]="data.editedList.title" (keyup.enter)="onSaveClick()" cdkFocusInitial>
+      <input autocomplete="off"  matInput [(ngModel)]="data.editedList.title" (keyup.enter)="onSaveClick()" cdkFocusInitial>
     </mat-form-field>
   </div>
 </div>

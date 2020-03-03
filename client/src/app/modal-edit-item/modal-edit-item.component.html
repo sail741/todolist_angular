@@ -1,6 +1,6 @@
 <div mat-dialog-content>
   <mat-form-field>
-    <input matInput [(ngModel)]="data.editedItem.title" (keyup.enter)="onSaveClick()" cdkFocusInitial>
+    <input autocomplete="off" matInput [(ngModel)]="data.editedItem.title" (keyup.enter)="onSaveClick()" cdkFocusInitial>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Flag</mat-label>

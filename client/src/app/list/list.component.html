@@ -59,6 +59,6 @@
 </div>
 
 <div class="list-row">
-  <input placeholder="New item..." type="text" class="input-new-item" [(ngModel)]="addedValue" (keyup.enter)="addItem()" matInput>
+  <input autocomplete="off" placeholder="New item..." type="text" class="input-new-item" [(ngModel)]="addedValue" (keyup.enter)="addItem()" matInput>
   <button mat-raised-button class="button-add" (click)="addItem()">Add</button>
 </div>
