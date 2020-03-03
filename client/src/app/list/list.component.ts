@@ -168,12 +168,8 @@ export class ListComponent implements OnInit {
     });
   }
 
-  clickListTitle(event) {
-    if (event.ctrlKey) {
-      console.log('todo');
-    } else {
-      this.openModalEditList();
-    }
+  clickListTitle() {
+    this.openModalEditList();
   }
 
   openModalEditList() {
@@ -200,6 +196,10 @@ export class ListComponent implements OnInit {
         }
       }
     });
+  }
+
+  openModalExpertList() {
+    console.log('export list display');
   }
 
 }

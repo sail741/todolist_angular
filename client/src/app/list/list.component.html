@@ -1,4 +1,4 @@
-<div class="header-line">
+<div class="header-line" xmlns="">
   <div class="header-home">
     <button mat-button (click)="router.navigateByUrl('/');">
       <div class="mat-icon-container">
@@ -8,7 +8,7 @@
   </div>
   <div class="header-title">
     <div class="header-title-button-cn">
-      <button mat-button (click)="clickListTitle($event);">
+      <button mat-button appLongPress (shortPress)="this.openModalEditList()" (longPress)="this.openModalExpertList()">
         <h2>{{this.list.title}}</h2>
       </button>
     </div>
@@ -62,3 +62,9 @@
   <input autocomplete="off" placeholder="New item..." type="text" class="input-new-item" [(ngModel)]="addedValue" (keyup.enter)="addItem()" matInput>
   <button mat-raised-button class="button-add" (click)="addItem()">Add</button>
 </div>
+
+<script>
+  longPress(document.querySelector(".header-title-button-cn button"), function() {
+    console.log("test")
+  }, 1000);
+</script>

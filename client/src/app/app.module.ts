@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import { ModalEditItemComponent } from './modal-edit-item/modal-edit-item.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ModalEditListComponent } from './modal-edit-list/modal-edit-list.component';
+import {LongPressDirective} from '../assets/long-press.directive';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ModalEditListComponent } from './modal-edit-list/modal-edit-list.compon
     HomeComponent,
     ModalEditItemComponent,
     ModalEditListComponent,
+    LongPressDirective
   ],
   imports: [
     BrowserModule,
