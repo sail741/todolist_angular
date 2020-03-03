@@ -27,6 +27,11 @@
   box-sizing: border-box;
   background: white;
   font-size: 14px;
+
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }
 
 .input-new-item {
