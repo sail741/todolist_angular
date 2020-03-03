@@ -11,7 +11,8 @@ RUN $(npm bin)/ng build --prod
 ### Run ###
 FROM nginx:1.17.1
 COPY --from=build /usr/src/app/dist/client /usr/share/nginx/html
-COPY ./entryPoint.sh /
+COPY ./docker_content/default.conf /etc/nginx/conf.d/
+COPY ./docker_content/entryPoint.sh /
 RUN chmod +x /entryPoint.sh
 ENTRYPOINT ["/entryPoint.sh"]
 CMD ["/bin/sh", "-c", "exec nginx -g 'daemon off;'"]
