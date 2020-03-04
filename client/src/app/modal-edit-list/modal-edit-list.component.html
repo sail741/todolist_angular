@@ -9,12 +9,11 @@
       </ng-template>
     </div>
     <mat-form-field>
-      <input autocomplete="off"  matInput [(ngModel)]="data.editedList.title" (keyup.enter)="onSaveClick()" cdkFocusInitial>
+      <input autocomplete="off"  matInput [(ngModel)]="data.editedList.title" (keydown.enter)="onSaveClick()" cdkFocusInitial>
     </mat-form-field>
   </div>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button (click)="onCancelClick()">Cancel</button>
   <button mat-raised-button (click)="onDeleteClick()" color="warn"><div class="container-text-maticon"><i class="material-icons md-16 margin-right-5">{{this.materialIconDelete}}</i> Delete</div></button>
   <button mat-raised-button (click)="onSaveClick()" color="primary" [disabled]="!this.hasValidData()">Save</button>
 </div>

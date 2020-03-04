@@ -40,7 +40,7 @@
       -->
     </div>
     <div class="item-flag mat-icon-container">
-      <div class="flag_{{item.flag}}">
+      <div [ngStyle]="{'display': item.flagIndex>0 ? 'block' : 'none', 'color': this.list.flags[item.flagIndex].value}">
         <i class="material-icons">flag</i>
       </div>
     </div>
@@ -62,9 +62,3 @@
   <input autocomplete="off" placeholder="New item..." type="text" class="input-new-item" [(ngModel)]="addedValue" (keyup.enter)="addItem()" matInput>
   <button mat-raised-button class="button-add" (click)="addItem()">Add</button>
 </div>
-
-<script>
-  longPress(document.querySelector(".header-title-button-cn button"), function() {
-    console.log("test")
-  }, 1000);
-</script>

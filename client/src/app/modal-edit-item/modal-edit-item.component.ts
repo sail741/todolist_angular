@@ -2,10 +2,11 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {ModalResultEnum} from '../ModalResultEnum';
 import {Item} from '../Item';
-import {Flag} from '../FlagEnum';
+import {Flag} from '../Flag';
 
 export interface DialogData {
   editedItem: Item;
+  flags: Flag[];
 }
 
 @Component({
@@ -14,9 +15,6 @@ export interface DialogData {
   styleUrls: ['./modal-edit-item.component.css']
 })
 export class ModalEditItemComponent implements OnInit {
-
-  mapFlag: {id: number; name: string}[] = [];
-  selectedFlag: string;
   askedForDelete: boolean;
   materialIconDelete: string;
 
@@ -26,12 +24,6 @@ export class ModalEditItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    for (const n in Flag) {
-      if (typeof Flag[n] === 'number') {
-        this.mapFlag.push({id: Flag[n] as any, name: n});
-      }
-    }
-    this.selectedFlag = this.mapFlag[this.data.editedItem.flag].name;
     this.askedForDelete = false;
     this.materialIconDelete = 'lock';
   }
@@ -44,17 +36,9 @@ export class ModalEditItemComponent implements OnInit {
     if (!this.hasValidData()) {
       return;
     }
-    this.data.editedItem.flag = Flag[this.selectedFlag];
     this.dialogRef.close({
       status: ModalResultEnum.SAVE,
       data: this.data.editedItem
-    });
-  }
-
-  onCancelClick(): void {
-    this.dialogRef.close({
-      status: ModalResultEnum.CANCEL,
-      data: null
     });
   }
 

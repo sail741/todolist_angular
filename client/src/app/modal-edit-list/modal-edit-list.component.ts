@@ -40,13 +40,6 @@ export class ModalEditListComponent implements OnInit {
     });
   }
 
-  onCancelClick(): void {
-    this.dialogRef.close({
-      status: ModalResultEnum.CANCEL,
-      data: null
-    });
-  }
-
   unlockDelete() {
     this.askedForDelete = true;
     this.materialIconDelete = 'lock_open';

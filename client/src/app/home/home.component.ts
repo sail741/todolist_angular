@@ -3,6 +3,7 @@ import {ItemService} from '../item.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {max} from 'rxjs/operators';
 import {List} from '../List';
+import defaultColors from '../../assets/defaultColors';
 
 
 @Component({
@@ -73,6 +74,7 @@ export class HomeComponent implements OnInit {
         id: maxId + 1,
         title: listTitle,
         isFav: false,
+        flags: defaultColors,
         items: []
       };
 

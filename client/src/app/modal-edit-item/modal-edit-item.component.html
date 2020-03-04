@@ -1,16 +1,22 @@
 <div mat-dialog-content>
   <mat-form-field>
+    <!--
     <input autocomplete="off" matInput [(ngModel)]="data.editedItem.title" (keyup.enter)="onSaveClick()" cdkFocusInitial>
+    -->
+    <textarea matInput matTextareaAutosize [(ngModel)]="data.editedItem.title" (keydown.enter)="onSaveClick();$event.preventDefault();"></textarea>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Flag</mat-label>
-    <select [(ngModel)]="selectedFlag" matNativeControl>
-      <option *ngFor="let flag of this.mapFlag; index as i" value="{{flag.name}}" [selected]="this.data.editedItem.flag === flag.id">{{flag.name}}</option>
+    <select [(ngModel)]="this.data.editedItem.flagIndex" [ngStyle]="{'color': this.data.flags[this.data.editedItem.flagIndex].value}" matNativeControl>
+      <option *ngFor="let flag of this.data.flags; index as i"
+              [ngValue]="i"
+              [ngStyle]="{'color': flag.value}">
+        {{flag.name}}
+      </option>
     </select>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button (click)="onCancelClick()">Cancel</button>
   <button mat-raised-button (click)="onDeleteClick()" color="warn"><div class="container-text-maticon"><i class="material-icons md-16 margin-right-5">{{this.materialIconDelete}}</i> Delete</div></button>
   <button mat-raised-button (click)="onSaveClick()" color="primary" [disabled]="!this.hasValidData()">Save</button>
 </div>

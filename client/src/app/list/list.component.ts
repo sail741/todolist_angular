@@ -6,12 +6,12 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {MatDialog} from '@angular/material';
 import {ModalEditItemComponent} from '../modal-edit-item/modal-edit-item.component';
 import {ModalResultEnum} from '../ModalResultEnum';
-import {Flag} from '../FlagEnum';
 import {ModalEditListComponent} from '../modal-edit-list/modal-edit-list.component';
 import {query} from '@angular/animations';
 import { Location } from '@angular/common';
 import {Item} from '../Item';
 import {List} from '../List';
+import defaultColors from '../../assets/defaultColors';
 
 @Component({
   selector: 'app-items',
@@ -50,6 +50,10 @@ export class ListComponent implements OnInit {
     this.itemService.getList(id).subscribe({
       next: (list => {
         this.list = list;
+        // We add default flagIndex for support previous version
+        if (!('flags' in list)) {
+          this.list.flags = defaultColors;
+        }
         if (popupAfter) {
           this.openModalEditList();
         }
@@ -82,7 +86,7 @@ export class ListComponent implements OnInit {
     const newItem = {} as Item;
     newItem.selected = false;
     newItem.title = this.addedValue.trim();
-    newItem.flag = Flag.NO_FLAG;
+    newItem.flagIndex = 0;
     this.list.items.push(newItem);
     this.addedValue = '';
     this.updateDatabase();
@@ -145,7 +149,10 @@ export class ListComponent implements OnInit {
   openModalEditItem(index: number) {
     const dialogRef = this.dialog.open(ModalEditItemComponent, {
       width: '800px',
-      data: {editedItem: this.copy(this.list.items[index])}
+      data: {
+        editedItem: this.copy(this.list.items[index]),
+        flags: this.list.flags
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
