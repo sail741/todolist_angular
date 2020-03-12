@@ -5,6 +5,7 @@ import {List} from '../List';
 
 export interface DialogData {
   editedList: List;
+  isExpertMode: boolean;
 }
 
 @Component({
@@ -27,7 +28,18 @@ export class ModalEditListComponent implements OnInit {
   }
 
   hasValidData() {
-    return this.data.editedList.title !== '' && this.data.editedList.title.length < 75;
+    // title check
+    if (this.data.editedList.title === '' || this.data.editedList.title.length < 75) {
+      return false;
+    }
+
+    // Flag name check
+    for (const flag of this.data.editedList.flags) {
+      if (flag.name === '') {
+        return false;
+      }
+    }
+    return true;
   }
 
   onSaveClick(): void {

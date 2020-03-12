@@ -8,7 +8,7 @@
   </div>
   <div class="header-title">
     <div class="header-title-button-cn">
-      <button mat-button appLongPress (shortPress)="this.openModalEditList()" (longPress)="this.openModalExpertList()">
+      <button mat-button appLongPress (shortPress)="this.openModalEditList(false)" (longPress)="this.openModalEditList(true)">
         <h2>{{this.list.title}}</h2>
       </button>
     </div>

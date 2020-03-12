@@ -55,7 +55,7 @@ export class ListComponent implements OnInit {
           this.list.flags = defaultColors;
         }
         if (popupAfter) {
-          this.openModalEditList();
+          this.openModalEditList(false);
         }
         this.historic.push(this.copy(list));
       })
@@ -175,14 +175,13 @@ export class ListComponent implements OnInit {
     });
   }
 
-  clickListTitle() {
-    this.openModalEditList();
-  }
-
-  openModalEditList() {
+  openModalEditList(openAsExpert: boolean) {
     const dialogRef = this.dialog.open(ModalEditListComponent, {
       width: '800px',
-      data: {editedList: { ...this.list} }
+      data: {
+        editedList: { ...this.list},
+        isExpertMode: openAsExpert
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {

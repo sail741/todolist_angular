@@ -8,7 +8,15 @@ import { ListComponent } from './list/list.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './routerConfig';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import {MatButtonModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatGridListModule, MatInputModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule, MatDividerModule,
+  MatFormFieldModule,
+  MatGridListModule,
+  MatInputModule,
+  MatSelectModule
+} from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ModalEditItemComponent } from './modal-edit-item/modal-edit-item.component';
@@ -39,7 +47,9 @@ import {LongPressDirective} from '../assets/long-press.directive';
     BrowserAnimationsModule,
     MatInputModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSelectModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

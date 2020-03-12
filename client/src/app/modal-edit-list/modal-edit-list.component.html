@@ -1,6 +1,6 @@
 <div mat-dialog-content>
-  <div class="fav_title_container">
-    <div class="fav_div" (click)="toggleFav()">
+  <div class="flex">
+    <div class="fav_div flex-middle pad-lr-5" (click)="toggleFav()">
       <div *ngIf="this.data.editedList.isFav;else is_not_fav" class="is_fav">
         <i class="material-icons">star</i>
       </div>
@@ -9,8 +9,23 @@
       </ng-template>
     </div>
     <mat-form-field>
-      <input autocomplete="off"  matInput [(ngModel)]="data.editedList.title" (keydown.enter)="onSaveClick()" cdkFocusInitial>
+      <input autocomplete="off" matInput [(ngModel)]="data.editedList.title" (keydown.enter)="onSaveClick()" cdkFocusInitial>
     </mat-form-field>
+  </div>
+  <div *ngIf="this.data.isExpertMode" class="edit-expert-div">
+    <br/>
+    <mat-divider></mat-divider>
+    <br/>
+    <h3>EXPERT</h3>
+    <i>Changer le label des drapeaux</i>
+    <div *ngFor="let flag of this.data.editedList.flags; index as i" class="flex">
+      <div class="flex-middle pad-lr-5" [ngClass]="i==0?'strikethrough':''">
+        <i class="material-icons" [ngStyle]="{'color':flag.value}">{{i>0 ? 'flag': 'outlined_flag'}}</i>
+      </div>
+      <mat-form-field>
+        <input matInput [(ngModel)]="flag.name" (keydown.enter)="onSaveClick()">
+      </mat-form-field>
+    </div>
   </div>
 </div>
 <div mat-dialog-actions>
