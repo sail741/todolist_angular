@@ -29,7 +29,7 @@ export class ModalEditListComponent implements OnInit {
 
   hasValidData() {
     // title check
-    if (this.data.editedList.title === '' || this.data.editedList.title.length < 75) {
+    if (this.data.editedList.title === '' || this.data.editedList.title.length > 75) {
       return false;
     }
 
