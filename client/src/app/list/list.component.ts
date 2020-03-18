@@ -50,10 +50,6 @@ export class ListComponent implements OnInit {
     this.itemService.getList(id).subscribe({
       next: (list => {
         this.list = list;
-        // We add default flagIndex for support previous version
-        if (!('flags' in list)) {
-          this.list.flags = defaultColors;
-        }
         if (popupAfter) {
           this.openModalEditList(false);
         }
