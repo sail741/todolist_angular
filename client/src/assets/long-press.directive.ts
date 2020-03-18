@@ -18,9 +18,6 @@ export class LongPressDirective {
   @Output()
   longPress = new EventEmitter();
 
-  @Output()
-  shortPress = new EventEmitter();
-
   @HostListener('touchstart', ['$event'])
   @HostListener('mousedown', ['$event'])
   onMouseDown(event) {
@@ -33,13 +30,6 @@ export class LongPressDirective {
 
   @HostListener('touchend', ['$event'])
   @HostListener('mouseup', ['$event'])
-  endPress(event) {
-    if (!this.longPressing && this.pressing) {
-      this.shortPress.emit(event);
-    }
-    this.clearPressing();
-  }
-
   @HostListener('mouseleave')
   clearPressing() {
     clearTimeout(this.timeout);
