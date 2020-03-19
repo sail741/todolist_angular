@@ -1,8 +1,5 @@
 .list-card {
   cursor: pointer;
-}
-
-mat-card {
   width: calc(100% - 50px);
   height: calc(100% - 50px);
   -webkit-user-select: none; /* Safari */

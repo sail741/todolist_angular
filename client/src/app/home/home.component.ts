@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {max} from 'rxjs/operators';
 import {List} from '../List';
 import defaultColors from '../../assets/defaultColors';
+import {getBrowserWidth} from '../tools';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit {
   }
 
   calculateColumn() {
-    this.qtyColumn = Math.floor(window.screen.width / 300);
+    this.qtyColumn = Math.floor(getBrowserWidth() / 300);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -99,7 +100,7 @@ export class HomeComponent implements OnInit {
 
   generateSummary(list: List) {
     const result = [];
-    const maxChar = 33;
+    const maxChar = Math.floor((getBrowserWidth()*0.9) / this.qtyColumn / 10); // Used to be 33, but changed to be responsive
     for (let i = 0; i < list.items.length; i++) {
       const itemSummedUp = {
         content: '',

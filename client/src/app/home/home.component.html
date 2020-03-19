@@ -1,6 +1,6 @@
 <mat-grid-list cols="{{this.qtyColumn}}" rowHeight="150px">
-  <mat-grid-tile [colspan]="1" [rowspan]="1">
-    <mat-card class="list-card col-md-8" (click)="addNewList('New list')">
+  <mat-grid-tile>
+    <mat-card class="list-card" (click)="addNewList('New list')">
       <mat-card-header>
         <mat-card-title>Add a new list</mat-card-title>
       </mat-card-header>
@@ -9,8 +9,8 @@
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>
-  <mat-grid-tile [colspan]="1" [rowspan]="1" *ngFor="let list of this.getOrderedLists()">
-    <mat-card class="list-card col-md-8" routerLink="/list/{{list.id}}">
+  <mat-grid-tile *ngFor="let list of this.getOrderedLists()">
+    <mat-card class="list-card" routerLink="/list/{{list.id}}">
       <mat-card-header>
         <mat-card-title>
           <i *ngIf="list.isFav" class="material-icons">star</i>
