@@ -10,6 +10,7 @@ import {ModalEditListComponent} from '../modal-edit-list/modal-edit-list.compone
 import { Location } from '@angular/common';
 import {Item} from '../Item';
 import {List} from '../List';
+import {isMobile} from '../tools';
 
 @Component({
   selector: 'app-items',
@@ -161,7 +162,8 @@ export class ListComponent implements OnInit {
       data: {
         editedItem: this.copy(this.list.items[index]),
         flags: this.list.flags
-      }
+      },
+      autoFocus: !isMobile()
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -190,7 +192,8 @@ export class ListComponent implements OnInit {
       data: {
         editedList: { ...this.list},
         isExpertMode: openAsExpert
-      }
+      },
+      autoFocus: !isMobile()
     });
 
     dialogRef.afterClosed().subscribe(result => {
