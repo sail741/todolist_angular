@@ -15,7 +15,7 @@ import {
   MatFormFieldModule,
   MatGridListModule,
   MatInputModule,
-  MatSelectModule
+  MatSelectModule, MatSnackBarModule
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -49,7 +49,8 @@ import {LongPressDirective} from '../assets/long-press.directive';
     MatCardModule,
     MatGridListModule,
     MatSelectModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

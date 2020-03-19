@@ -1,17 +1,15 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ItemService} from '../item.service';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {ModalEditItemComponent} from '../modal-edit-item/modal-edit-item.component';
 import {ModalResultEnum} from '../ModalResultEnum';
 import {ModalEditListComponent} from '../modal-edit-list/modal-edit-list.component';
-import {query} from '@angular/animations';
 import { Location } from '@angular/common';
 import {Item} from '../Item';
 import {List} from '../List';
-import defaultColors from '../../assets/defaultColors';
 
 @Component({
   selector: 'app-items',
@@ -27,7 +25,7 @@ export class ListComponent implements OnInit {
   private routeSub: Subscription;
 
   constructor(private itemService: ItemService, private route: ActivatedRoute, public router: Router,
-              public dialog: MatDialog, private location: Location) { }
+              public dialog: MatDialog, private location: Location, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.list = {} as List;
@@ -113,32 +111,47 @@ export class ListComponent implements OnInit {
     return this.currentHistoricIndex < this.historic.length - 1;
   }
 
-  prevHistoric() {
+  prevHistoric(shouldUpdateDatabase: boolean = true) {
     if (!this.canPrevHistoric()) {
       return;
     }
     this.currentHistoricIndex--;
     this.list = this.copy(this.historic[this.currentHistoricIndex]);
-    this.updateDatabase(false);
+    if (shouldUpdateDatabase) {
+      this.updateDatabase(false);
+    }
   }
 
-  nextHistoric() {
+  nextHistoric(shouldUpdateDatabase: boolean = true) {
     if (!this.canNextHistoric()) {
       return;
     }
     this.currentHistoricIndex++;
     this.list = this.copy(this.historic[this.currentHistoricIndex]);
-    this.updateDatabase(false);
+    if (shouldUpdateDatabase) {
+      this.updateDatabase(false);
+    }
   }
 
   updateDatabase(shouldAddToHisto: boolean = true) {
-    this.itemService.putList(this.list).subscribe();
-    if (shouldAddToHisto) {
-      if (this.currentHistoricIndex < this.historic.length - 1) {
-        console.log('todo : retirer la fin');
-        this.historic = this.copy(this.historic.slice(0, this.currentHistoricIndex + 1));
+    let previousAddedToHisto = false;
+    let errorHappened = false;
+    this.itemService.putList(this.list).subscribe(res => {}, err => {
+      errorHappened = true;
+      if (previousAddedToHisto) {
+        this.prevHistoric(false);
+        this.historic.pop();
       }
-      this.addToHistoric();
+      this.openSnackBarError();
+    });
+    if (!errorHappened) {
+      previousAddedToHisto = true;
+      if (shouldAddToHisto) {
+        if (this.currentHistoricIndex < this.historic.length - 1) {
+          this.historic = this.copy(this.historic.slice(0, this.currentHistoricIndex + 1));
+        }
+        this.addToHistoric();
+      }
     }
   }
 
@@ -192,16 +205,22 @@ export class ListComponent implements OnInit {
           break;
         }
         case ModalResultEnum.DELETE : {
-          this.itemService.deleteList(this.list).subscribe();
-          this.router.navigateByUrl('/');
+          this.itemService.deleteList(this.list).subscribe(res => {
+            this.router.navigateByUrl('/');
+          }, err => {
+            this.openSnackBarError();
+          });
           break;
         }
       }
     });
   }
 
-  openModalExpertList() {
-    console.log('export list display');
+  openSnackBarError() {
+    this.snackBar.open('Erreur : connexion impossible à la base de données', null, {
+      duration: 2000,
+      panelClass: ['warning-snackbar']
+    });
   }
 
 }
