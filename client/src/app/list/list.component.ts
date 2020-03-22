@@ -10,7 +10,7 @@ import {ModalEditListComponent} from '../modal-edit-list/modal-edit-list.compone
 import { Location } from '@angular/common';
 import {Item} from '../Item';
 import {List} from '../List';
-import {isMobile} from '../tools';
+import {isMobile, isOnline} from '../tools';
 
 @Component({
   selector: 'app-items',
@@ -65,16 +65,28 @@ export class ListComponent implements OnInit {
     if (event.previousIndex === event.currentIndex) {
       return;
     }
+    if(!isOnline()) {
+      this.openSnackBarError();
+      return;
+    }
     moveItemInArray(this.list.items, event.previousIndex, event.currentIndex);
     this.updateDatabase();
   }
 
   toggle(item: Item) {
+    if(!isOnline()) {
+      this.openSnackBarError();
+      return;
+    }
     item.selected = !item.selected;
     this.updateDatabase();
   }
 
   addItem() {
+    if(!isOnline()) {
+      this.openSnackBarError();
+      return;
+    }
     if (!this.addedValue) {
       return;
     }
@@ -88,6 +100,10 @@ export class ListComponent implements OnInit {
   }
 
   removeItem(index: number) {
+    if(!isOnline()) {
+      this.openSnackBarError();
+      return;
+    }
     this.list.items.splice(index, 1);
     this.updateDatabase();
   }
@@ -116,6 +132,10 @@ export class ListComponent implements OnInit {
     if (!this.canPrevHistoric()) {
       return;
     }
+    if(!isOnline()) {
+      this.openSnackBarError();
+      return;
+    }
     this.currentHistoricIndex--;
     this.list = this.copy(this.historic[this.currentHistoricIndex]);
     if (shouldUpdateDatabase) {
@@ -125,6 +145,10 @@ export class ListComponent implements OnInit {
 
   nextHistoric(shouldUpdateDatabase: boolean = true) {
     if (!this.canNextHistoric()) {
+      return;
+    }
+    if(!isOnline()) {
+      this.openSnackBarError();
       return;
     }
     this.currentHistoricIndex++;
@@ -170,6 +194,10 @@ export class ListComponent implements OnInit {
       if (!result) {
         return;
       }
+      if(!isOnline()) {
+        this.openSnackBarError();
+        return;
+      }
       switch (result.status) {
         case ModalResultEnum.SAVE: {
           result.data.title = result.data.title.trim();
@@ -198,6 +226,10 @@ export class ListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (!result) {
+        return;
+      }
+      if(!isOnline()) {
+        this.openSnackBarError();
         return;
       }
       switch (result.status) {

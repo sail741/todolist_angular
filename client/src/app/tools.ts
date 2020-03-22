@@ -14,3 +14,7 @@ export function getBrowserWidth() {
     document.documentElement.clientWidth
   );
 }
+
+export function isOnline() {
+  return navigator.onLine;
+}

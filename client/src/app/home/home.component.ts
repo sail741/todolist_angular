@@ -4,7 +4,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {max} from 'rxjs/operators';
 import {List} from '../List';
 import defaultColors from '../../assets/defaultColors';
-import {getBrowserWidth} from '../tools';
+import {getBrowserWidth, isOnline} from '../tools';
+import {Location} from '@angular/common';
+import {MatSnackBar} from '@angular/material';
 
 
 @Component({
@@ -18,7 +20,7 @@ export class HomeComponent implements OnInit {
   lists: List[];
   qtyColumn: number;
 
-  constructor(private itemService: ItemService, private router: Router) { }
+  constructor(private itemService: ItemService, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.lists = [];
@@ -66,6 +68,10 @@ export class HomeComponent implements OnInit {
   }
 
   addNewList(listTitle: string) {
+    if(!isOnline()) {
+      this.openSnackBarError();
+      return;
+    }
     let maxId = 1;
     this.itemService.getLists().subscribe(lists => {
       lists.forEach(list => {
@@ -115,6 +121,13 @@ export class HomeComponent implements OnInit {
       result.push(itemSummedUp);
     }
     return result;
+  }
+
+  openSnackBarError() {
+    this.snackBar.open('Erreur : connexion impossible à la base de données', null, {
+      duration: 2000,
+      panelClass: ['warning-snackbar']
+    });
   }
 
 }
