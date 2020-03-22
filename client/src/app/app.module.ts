@@ -23,6 +23,8 @@ import { ModalEditItemComponent } from './modal-edit-item/modal-edit-item.compon
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ModalEditListComponent } from './modal-edit-list/modal-edit-list.component';
 import {LongPressDirective} from '../assets/long-press.directive';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import {LongPressDirective} from '../assets/long-press.directive';
     MatGridListModule,
     MatSelectModule,
     MatDividerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent],

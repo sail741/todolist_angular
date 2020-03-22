@@ -28,8 +28,8 @@ export class LongPressDirective {
     }, 500);
   }
 
-  @HostListener('touchend', ['$event'])
-  @HostListener('mouseup', ['$event'])
+  @HostListener('touchend')
+  @HostListener('mouseup')
   @HostListener('mouseleave')
   clearPressing() {
     clearTimeout(this.timeout);
