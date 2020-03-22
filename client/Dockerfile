@@ -10,7 +10,7 @@ RUN $(npm bin)/ng build --prod
 
 ### Run ###
 FROM nginx:1.17.1
-COPY --from=build /usr/src/app/dist/client /usr/share/nginx/html
+COPY --from=build /usr/src/app/dist/ /usr/share/nginx/html
 COPY ./docker_content/default.conf /etc/nginx/conf.d/
 COPY ./docker_content/entryPoint.sh /
 RUN chmod +x /entryPoint.sh

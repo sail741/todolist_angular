@@ -26,7 +26,8 @@
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "typescript": "~3.5.3",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "@babel/compat-data": "~7.8.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.23",
@@ -46,7 +47,8 @@
     "karma-jasmine-html-reporter": "^1.4.0",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
-    "tslint": "~5.15.0"
+    "tslint": "~5.15.0",
+    "@babel/compat-data": "~7.8.0"
   },
   "resolutions": {
     "@babel/preset-env": "7.5.5"
