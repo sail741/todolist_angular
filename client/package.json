@@ -47,5 +47,8 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0"
+  },
+  "resolutions": {
+    "@babel/preset-env": "7.5.5"
   }
 }
