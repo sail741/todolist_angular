@@ -30,7 +30,7 @@
     {
       "name": "api-freshness",
       "urls": [
-        "REST_API_URL_REPLACE/lists/**"
+        "https://api.todo.sail.ovh/**/**"
       ],
       "cacheConfig": {
         "strategy": "freshness",
