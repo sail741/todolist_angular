@@ -1,0 +1,6 @@
+# Backup every day at midnight
+00 00 * * * /backupDatabse.sh backup.1.daily >> /var/log/cron.log 2>&1
+# Backup every monday
+00 00 * * 1 /backupDatabse.sh backup.2.weekly >> /var/log/cron.log 2>&1
+# Backup every 1st of each month
+00 00 01 * * /backupDatabse.sh backup.3.monthly >> /var/log/cron.log 2>&1
