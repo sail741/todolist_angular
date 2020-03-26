@@ -161,6 +161,7 @@ export class ListComponent implements OnInit {
   updateDatabase(shouldAddToHisto: boolean = true) {
     let previousAddedToHisto = false;
     let errorHappened = false;
+    this.list.lastEdit = (new Date()).toJSON();
     this.itemService.putList(this.list).subscribe(res => {}, err => {
       errorHappened = true;
       if (previousAddedToHisto) {

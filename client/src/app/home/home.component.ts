@@ -81,6 +81,7 @@ export class HomeComponent implements OnInit {
         id: maxId + 1,
         title: listTitle,
         isFav: false,
+        lastEdit: (new Date()).toJSON(),
         flags: defaultColors,
         items: []
       };

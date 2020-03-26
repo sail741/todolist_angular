@@ -5,6 +5,7 @@ export interface List {
   id: number;
   title: string;
   isFav: boolean;
+  lastEdit: string;
   flags: Flag[];
   items: Item[];
 }
