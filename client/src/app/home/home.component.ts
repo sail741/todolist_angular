@@ -53,17 +53,33 @@ export class HomeComponent implements OnInit {
   }
 
   getOrderedLists(): List[] {
-    const res = [];
+    const resFav = [];
+    const resNotFav = [];
+    let res = [];
     for (const list of this.lists) {
       if (list.isFav) {
-        res.push(list);
+        resFav.push(list);
       }
     }
     for (const list of this.lists) {
       if (!list.isFav) {
-        res.push(list);
+        resNotFav.push(list);
       }
     }
+
+    resFav.sort(function(a: List, b: List) {
+      const lastEditA = a.lastEdit;
+      const lastEditB = b.lastEdit;
+      return (lastEditA < lastEditB) ? 1 : (lastEditA > lastEditB) ? -1 : 0;
+    });
+
+    resNotFav.sort(function(a: List, b: List) {
+      const lastEditA = a.lastEdit;
+      const lastEditB = b.lastEdit;
+      return (lastEditA < lastEditB) ? 1 : (lastEditA > lastEditB) ? -1 : 0;
+    });
+
+    res = resFav.concat(resNotFav);
     return res;
   }
 
