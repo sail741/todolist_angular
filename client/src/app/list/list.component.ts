@@ -259,4 +259,12 @@ export class ListComponent implements OnInit {
     });
   }
 
+
+  public increaseFlagIndex(item: Item) {
+    item.flagIndex++;
+    item.flagIndex = item.flagIndex % this.list.flags.length;
+
+    this.updateDatabase();
+  }
+
 }

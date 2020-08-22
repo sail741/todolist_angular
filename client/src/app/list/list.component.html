@@ -39,7 +39,7 @@
       <i class="material-icons">open_with</i>
       -->
     </div>
-    <div class="item-flag mat-icon-container">
+    <div class="item-flag mat-icon-container" (click)="$event.stopPropagation();increaseFlagIndex(item)">
       <div [ngStyle]="{'display': item.flagIndex>0 ? 'block' : 'none', 'color': this.list.flags[item.flagIndex].value}">
         <i class="material-icons">flag</i>
       </div>
